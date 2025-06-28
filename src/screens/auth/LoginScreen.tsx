@@ -1,23 +1,41 @@
+import React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types/navigation';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
+// Defina explicitamente os parâmetros de navegação
+type LoginScreenNavigationProp = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
-export default function LoginScreen({ navigation }: Props) {
+const LoginScreen: React.FC<LoginScreenNavigationProp> = ({ navigation }) => {
   return (
-    <View>
+    <View style={{ padding: 20 }}>
       <Text>Login</Text>
-      <TextInput placeholder="E-mail" />
-      <TextInput placeholder="Senha" secureTextEntry />
-      <Button 
-        title="Entrar" 
-        onPress={() => navigation.navigate('TutorHome')} 
+      <TextInput 
+        placeholder="E-mail" 
+        style={{ borderWidth: 1, marginVertical: 10, padding: 8 }} 
       />
+      <TextInput 
+        placeholder="Senha" 
+        secureTextEntry 
+        style={{ borderWidth: 1, marginVertical: 10, padding: 8 }} 
+      />
+      
+      <Button 
+        title="Entrar como Tutor" 
+        onPress={() => navigation.navigate('TutorHome' as never)} 
+      />
+      
+      <Button 
+        title="Entrar como Passeador" 
+        onPress={() => navigation.navigate('WalkerHome' as never)} 
+      />
+      
       <Button 
         title="Cadastrar" 
-        onPress={() => navigation.navigate('Register')} 
+        onPress={() => navigation.navigate('Register' as never)} 
       />
     </View>
   );
-}
+};
+
+export default LoginScreen;
